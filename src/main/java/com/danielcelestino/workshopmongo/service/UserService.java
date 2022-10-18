@@ -12,25 +12,30 @@ import com.danielcelestino.workshopmongo.service.exception.ObjectNotFoudExceptio
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserRepository repository;
-	
-	public List<User> findAll(){
+
+	public List<User> findAll() {
 		return repository.findAll();
 	}
-	
-	public User findById(String id){
+
+	public User findById(String id) {
 		User user = repository.findById(id).orElseThrow(() -> new ObjectNotFoudException("Object not found!"));
 		return user;
 	}
-	
-	public User insert(User user){
+
+	public User insert(User user) {
 		return repository.insert(user);
 	}
-	
+
+	public void delete(String id) {
+		findById(id);
+		repository.deleteById(id);
+	}
+
 	public User fromDTO(UserDTO objDto) {
-		return new User(objDto.getId(),objDto.getName(),objDto.getEmail());
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 
 }
