@@ -1,5 +1,6 @@
 package com.danielcelestino.workshopmongo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class PostService {
 	
 	public List<Post> findByTitle(String text){
 		return repository.searchTitle(text);
+	}
+	
+	public List<Post> findByFullSearch(String text, Date dateMin, Date dateMax){
+		dateMax = new Date(dateMax.getTime()); //encontrando a data 4 horas depois
+		return repository.fullSearchTitle(text,dateMin,dateMax);
 	}
 
 	
