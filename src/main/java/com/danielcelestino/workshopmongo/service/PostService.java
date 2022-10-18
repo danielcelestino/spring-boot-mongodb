@@ -23,6 +23,10 @@ public class PostService {
 		Post post = repository.findById(id).orElseThrow(() -> new ObjectNotFoudException("Object not found!"));
 		return post;
 	}
+	
+	public List<Post> findByTitle(String text){
+		return repository.findByTitleContaining(text);
+	}
 
 	
 
